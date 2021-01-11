@@ -17,11 +17,25 @@ spec:
       containers:
       - name: feedsapi
         image: dockertanj/feedsapi
-        ports:
-        - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 15
-          periodSeconds: 15
+        env:
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: envconfig
+              key: POSTGRES_USERNAME
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: envconfig
+              key: POSTGRES_PASSWORD  
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: envconfig
+              key: POSTGRES_HOST  
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: envconfig
+              key: POSTGRES_DB
+        
