@@ -17,6 +17,13 @@ spec:
       containers:
       - name: feedsapi
         image: dockertanj/feedsapi
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
         env:
         - name: POSTGRES_USERNAME
           valueFrom:
@@ -37,5 +44,5 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: envconfig
-              key: POSTGRES_DB
+              key: POSTGRES_DB         
         
